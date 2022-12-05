@@ -1,15 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Button, Table, Pagination } from "antd";
+import { Table, Modal, Form, Input } from "antd";
 import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 const ViewVehicalCategory = () => {
+  const [users, setUsers] = useState([{}]);
+
+  const [users1, setUsers1] = useState([{
+    vehicle_cat_id:"",
+     vehicle_type:""
+  }]);
+
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState([0]);
+  const [loading, setLoading] = useState("");
+  const [isEditing, setisEditing] = useState(false);
 
   const columns = [
     {
@@ -28,10 +36,12 @@ const ViewVehicalCategory = () => {
       render: (data) => {
         return (
           <>
-            <EditOutlined
+            <Link to={`/updatevehiclecategory/${data.vehicle_cat_id}`}>
+           <EditOutlined
               style={{ color: "blue", fontSize: 20 }}
-              onClick={() => {}}
+              onClick={() => handleRoutes(data.vehicle_cat_id)}
             />
+           </Link>
 
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
@@ -45,19 +55,50 @@ const ViewVehicalCategory = () => {
     },
   ];
 
+  const Inputhandlechange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    setUsers({
+      ...users,
+      [name]: value,
+    });
+  };
+
+  // const EditUser = async (vehicle_cat_id) => {
+  //     const Response = await fetch(`http://localhost:4000/viewvehicle_categorybyid/${vehicle_cat_id}`, {
+  //       method: "GET",
+  // });
+      
+  //     const data1 =  await Response.json();
+  //     setUsers1(data1);
+  //     // console.log("ay", data1);
+  //     console.log("Satyam",users1);
+  //     setisEditing(true);
+  // };
+
+  const handleCancel = () => {
+    setisEditing(false);
+  };
+
+  const handleOk = () => {
+    setisEditing(false);
+  };
+
   const getData = async () => {
-    setLoading(1);
-    const res = await fetch("http://localhost:4000/viewvehicle_category", {
+    // setLoading(1);
+    const Response = await fetch("http://localhost:4000/viewvehicle_category", {
       method: "GET",
     });
 
-    const data = await res.json();
-    setUsers(data);
-    console.log(data);
+     const data = await Response.json();
+     setUsers(data);
+     console.log("Satyam",users);
   };
 
+
   const deleteuser = async (vehicle_cat_id) => {
-    setLoading(10);
+    // setLoading(10);
     console.log(vehicle_cat_id);
     swal({
       title: "Are you sure?",
@@ -82,39 +123,61 @@ const ViewVehicalCategory = () => {
     });
   };
 
+   const handleRoutes = (id) => {
+     navigate(`updatevehiclecategory/${id}`);
+   };
+
   useEffect(() => {
     getData();
+  
   }, []);
 
-  
   return (
     <div>
       <div>
-        <div
-          style={{
-            marginBottom: -84,
+        <div>
+          <span></span>
+        </div>
+        <Table columns={columns} dataSource={users} pagination={true} />
+        <Modal
+          title="Edit Vehicle Category"
+          visible={isEditing}
+          onCancel={handleCancel}
+          onOk={handleOk}
+          okText="Save"
+          bodyStyle={{
+            borderRadius: "200px",
+            height: "100px",
+            backgroundColor: "transparent",
+            marginTop: "80px",
           }}
         >
-          <Button
-            type="primary"
-       
-            // disabled={!hasSelected}
-            loading={!loading}
-          >
-            Reload
-          </Button>
-          <span
-            
-          >
-            {/* {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""} */}
-          </span>
-        </div>
-        <Table
-          // rowSelection={rowSelection}
-          columns={columns}
-          dataSource={users}
-          pagination={true}
-        />
+          <Form>
+            <Form.Item
+              name="Vehical Cat Name"
+              rules={[
+                {
+                  required: true,
+                  message: "Vehical Category Name must be provided",
+                },
+                { min: 3 },
+              ]}
+              hasFeedback
+            >
+              <Input
+
+                style={{
+                  marginTop: "-15px",
+                  height: "40px",
+                }}
+                onChange={Inputhandlechange}
+                name="vehicle_type"
+                // value={vehicle_type}
+                required={users1.vehicle_type}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     </div>
   );

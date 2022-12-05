@@ -30,6 +30,8 @@ import Addcoupan from './Components/Coupan/Add_coupan';
 import Viewcoupan from './Components/Coupan/View_coupan';
 import Addoffer from './Components/Offer/Add_offer';
 import Viewoffer from './Components/Offer/View_offer';
+import UpdateVehiclecategory from './Components/Vehical/UpdateVehiclecategory';
+
 
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
                         <Route path="/addmodel" element={<Addmodel />} />
                         <Route path="/addcompany" element={<Addcompany />} />
                         <Route path="/addvehicalcategory" element={<Addvehiclecategory />} />
+                        <Route path="/updatevehiclecategory/:vehicle_cat_id" element={<UpdateVehiclecategory />} />
                         <Route path="/viewcompany" element={<Viewcompany />} />
                         <Route path="/viewmodel" element={<Viewmodel />} />
                         <Route path="/viewvehicalcategory" element={<Viewvehiclecategory />} />

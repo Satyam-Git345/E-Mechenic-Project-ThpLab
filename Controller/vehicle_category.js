@@ -19,9 +19,26 @@ const getvehical_cat = async (req, res) => {
     }
 }
 
+const getvehical_catbyid = async (req, res) => {
+    try {
+        const data = [req.params.vehicle_cat_id];
+        const qry = "SELECT * FROM tbl_vehicle_category WHERE vehicle_cat_id=?";
+        await conn.query(qry,data, (err, result) => {
+            if (err) {
+                console.log(err.sqlMessage);
+            }
+            else {
+                res.send(result);
+            }
+        })
+    }
+    catch (err) {
+        res.send(err.sqlMessage);
+    }
+}
+
 const postvehical_cat = async (req,res) => {
     try {
-
         const {vehicle_cat_id,vehicle_type} = req.body;
         const data={
             vehicle_type,
@@ -80,7 +97,7 @@ const update_vehical_cat= async(req, res) => {
     
 }
 
-module.exports = { getvehical_cat,postvehical_cat,delete_vehical_cat,update_vehical_cat,update_vehical_cat};
+module.exports = { getvehical_cat,postvehical_cat,delete_vehical_cat,update_vehical_cat,update_vehical_cat,getvehical_catbyid};
 
 
 
