@@ -1,52 +1,24 @@
 import React, { useState } from 'react';
+//import type { DatePickerProps } from 'antd';
+import { DatePicker, Space } from 'antd';
+import swal from 'sweetalert';
+import {useNavigate} from 'react-router-dom';
+
 import {
   AutoComplete,
   Button,
-  Cascader,
-  Checkbox,
-  Col,
   Form,
   Input,
   InputNumber,
-  Row,
   Select,
 } from 'antd';
 const { Option } = Select;
 
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
+
+// const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+//   console.log(date, dateString);
+// };
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -78,10 +50,65 @@ const tailFormItemLayout = {
   },
 };
 const Add_shop = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
+
+  const [data, setData] = useState(
+    {
+    shop_registration: "",
+    shop_name: "",
+    address: "",
+    state: "",
+    city: "",
+    pin: "",
+    mobile_no: "",
+    email: "",
+    website: "",
+    shop_owner_name: "",
+    shop_owner_mobile_no: "",
+    est_year:"",
+    service_type:"",
+    other_remark:"",
+    password: "",
+    reg_on:"",
+}
+);
+
+  const Inputhandlechange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const getuser = async () => {
+    const data1 = await fetch("http://localhost:4000/addshop", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(data1);
+  };
+
+  
+  const submitHandle = (e) => {
+    e.preventDefault();
+    getuser();
+    swal("Vehicle Category added successfully!","success");
+    navigate("/viewshop");
+  };
+
+
+
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -145,8 +172,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input   placeholder="Enter your shop name"/>
+        <Input   placeholder="Enter your shop name"   onChange={Inputhandlechange}/>
       </Form.Item>
+
       <Form.Item
         name="reg_no"
         label="Shop Registration Number :"
@@ -163,7 +191,7 @@ const Add_shop = () => {
           {min:10}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your Shop Registration Number name"   onChange={Inputhandlechange}/>
       </Form.Item>
 
       
@@ -179,7 +207,7 @@ const Add_shop = () => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password placeholder="Enter your Passward"   onChange={Inputhandlechange} />
       </Form.Item>
 
 
@@ -204,7 +232,7 @@ const Add_shop = () => {
         ]}
       >
 
-        <Input.Password />
+        <Input.Password placeholder="Enter your password again"   onChange={Inputhandlechange}/>
       </Form.Item>
 
 
@@ -224,7 +252,7 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your address"   onChange={Inputhandlechange} />
       </Form.Item>
 
       
@@ -244,7 +272,7 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your state"   onChange={Inputhandlechange}/>
       </Form.Item>
 
       <Form.Item
@@ -263,7 +291,7 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your city"   onChange={Inputhandlechange}/>
       </Form.Item>
 
 
@@ -283,24 +311,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your pin/zip code"   onChange={Inputhandlechange}/>
       </Form.Item>
 
-
-      {/* <Form.Item label="Phone Number">
-            {getFieldDecorator('phone', {
-              rules: [
-                { 
-                  required: true, 
-                  message: 'Please input your phone number!' 
-                },
-              {
-                validator: this.validateMobileNumber,
-              },
-            ],
-            })
-            (<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)}
-          </Form.Item> */}
 
 
       <Form.Item
@@ -317,7 +330,7 @@ const Add_shop = () => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your email"   onChange={Inputhandlechange}/>
       </Form.Item>
       
       
@@ -333,8 +346,8 @@ const Add_shop = () => {
           },
         ]}
       >
-        <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-          <Input />
+        <AutoComplete options={websiteOptions} onChange={onWebsiteChange}>
+          <Input placeholder="Enter your website url"   onChange={Inputhandlechange}/>
         </AutoComplete>
       </Form.Item>
 
@@ -355,10 +368,62 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input />
+        <Input placeholder="Enter your name"   onChange={Inputhandlechange}/>
+      </Form.Item>
+
+
+      <Form.Item
+        name="phone"
+        label="Phone Number:"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your phone number!',
+          },
+        ]}
+      >
+        <InputNumber  min={1} max={10} 
+          onChange={Inputhandlechange}
+          addonBefore={prefixSelector}
+          style={{
+            width: '100%',
+          }}
+        />
       </Form.Item>
 
       <Form.Item
+      name="date"
+      label="Established On:"
+      rules={[
+        {
+          required: true,
+          message: 'Please select date!',
+        },
+      ]}
+      >
+      <Space direction="vertical">
+           <DatePicker onChange={Inputhandlechange} />
+  
+      </Space>
+      </Form.Item>
+
+
+      <Form.Item
+        name="service type"
+        label="Service Type:"
+        rules={[
+          {
+            required: true,
+            message: 'Please input service type!',
+          },
+        ]}
+      >
+
+        <Input placeholder="Enter Service Type"   onChange={Inputhandlechange}/>
+      </Form.Item>
+
+
+      {/* <Form.Item
         name="gender"
         label="Gender"
         rules={[
@@ -368,29 +433,33 @@ const Add_shop = () => {
           },
         ]}
       >
+
         <Select placeholder="select your gender">
           <Option value="male">Male</Option>
           <Option value="female">Female</Option>
           <Option value="other">Other</Option>
         </Select>
-      </Form.Item>
+      </Form.Item> */}
 
       
 
-      <Form.Item
-        name="agreement"
-        valuePropName="checked"
+    <Form.Item
+        name="intro"
+        label="Other Remark:"
         rules={[
           {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+            required: true,
+            message: 'Please input other remark',
           },
         ]}
-        {...tailFormItemLayout}
       >
-        </Form.Item>
+        <Input.TextArea showCount maxLength={100}    onChange={Inputhandlechange}/>
+      </Form.Item>
+
+
+
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={submitHandle} >
           Register
         </Button>
       </Form.Item>
