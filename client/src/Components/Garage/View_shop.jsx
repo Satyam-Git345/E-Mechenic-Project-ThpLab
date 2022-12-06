@@ -57,7 +57,7 @@ const View_shop = () => {
       Key: "5",
       title: "Actions",
 
-      render: (data) => {
+      render: (users) => {
         return (
           <div style={{display: 'flex'}}>
             <EditOutlined
@@ -68,7 +68,7 @@ const View_shop = () => {
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
               onClick={() => {
-                deleteuser(data.shop_id);
+                deleteuser(users.shop_id);
               }}
             />
           </div>

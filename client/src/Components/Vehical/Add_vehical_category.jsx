@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 
 const Add_vehical_category = () => {
   const navigate = useNavigate();
+  
   const [data, setData] = useState({
     vehicle_type: "",
   });

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { DatePicker, Space } from 'antd';
 import swal from 'sweetalert';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 import {
   AutoComplete,
@@ -52,12 +53,12 @@ const tailFormItemLayout = {
 const Add_shop = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
 
-  const [data, setData] = useState(
-    {
+  const [data, setData] = useState({
     shop_registration: "",
     shop_name: "",
     address: "",
@@ -74,8 +75,7 @@ const Add_shop = () => {
     other_remark:"",
     password: "",
     reg_on:"",
-}
-);
+});
 
   const Inputhandlechange = (e) => {
     const name = e.target.name;
@@ -87,21 +87,31 @@ const Add_shop = () => {
     });
   };
 
-  const getuser = async () => {
+  const postUser = async () => {
     const data1 = await fetch("http://localhost:4000/addshop", {
-      method: "POST",
+      method: "post",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
     console.log(data1);
   };
 
+
   
+  //  const postUser= async ()=>{
+  //   axios.post(`https://localhost:4000/addshop`, { data })
+  //   .then(res => {
+  //     console.log(res);
+  //     console.log(res.data);
+  //   })
+  //  }
+
+
   const submitHandle = (e) => {
     e.preventDefault();
-    getuser();
+    postUser();
     swal("Vehicle Category added successfully!","success");
     navigate("/viewshop");
   };
@@ -172,7 +182,7 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input   placeholder="Enter your shop name"   onChange={Inputhandlechange}/>
+        <Input   placeholder="Enter your shop name"   onChange={Inputhandlechange}  value={data.shop_name}/>
       </Form.Item>
 
       <Form.Item
@@ -191,7 +201,9 @@ const Add_shop = () => {
           {min:10}
         ]}
       >
-        <Input placeholder="Enter your Shop Registration Number name"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your Shop Registration Number name"   onChange={Inputhandlechange} 
+         value={data.shop_registration}
+        />
       </Form.Item>
 
       
@@ -207,7 +219,8 @@ const Add_shop = () => {
         ]}
         hasFeedback
       >
-        <Input.Password placeholder="Enter your Passward"   onChange={Inputhandlechange} />
+        <Input.Password placeholder="Enter your Passward"  value={data.password}   
+        onChange={Inputhandlechange} />
       </Form.Item>
 
 
@@ -232,7 +245,9 @@ const Add_shop = () => {
         ]}
       >
 
-        <Input.Password placeholder="Enter your password again"   onChange={Inputhandlechange}/>
+        <Input.Password placeholder="Enter your password again"   onChange={Inputhandlechange}
+         value={data.password}
+        />
       </Form.Item>
 
 
@@ -252,7 +267,7 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your address"   onChange={Inputhandlechange} />
+        <Input placeholder="Enter your address"   onChange={Inputhandlechange} value={data.address} />
       </Form.Item>
 
       
@@ -272,7 +287,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your state"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your state"   onChange={Inputhandlechange}
+        value={data.state}
+        />
       </Form.Item>
 
       <Form.Item
@@ -291,7 +308,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your city"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your city"   onChange={Inputhandlechange}
+        value={data.city}
+        />
       </Form.Item>
 
 
@@ -311,7 +330,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your pin/zip code"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your pin/zip code"  
+        value={data.pin}
+        onChange={Inputhandlechange}/>
       </Form.Item>
 
 
@@ -330,7 +351,9 @@ const Add_shop = () => {
           },
         ]}
       >
-        <Input placeholder="Enter your email"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your email"  
+        value={data.email}
+        onChange={Inputhandlechange}/>
       </Form.Item>
       
       
@@ -347,7 +370,9 @@ const Add_shop = () => {
         ]}
       >
         <AutoComplete options={websiteOptions} onChange={onWebsiteChange}>
-          <Input placeholder="Enter your website url"   onChange={Inputhandlechange}/>
+          <Input placeholder="Enter your website url" 
+          value={data.website}
+          onChange={Inputhandlechange}/>
         </AutoComplete>
       </Form.Item>
 
@@ -368,7 +393,9 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your name"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter your name"  
+        value={data.shop_owner_name}
+        onChange={Inputhandlechange}/>
       </Form.Item>
 
 
@@ -382,7 +409,7 @@ const Add_shop = () => {
           },
         ]}
       >
-        <InputNumber  min={1} max={10} 
+        <InputNumber  min={1} max={10} value={data.shop_owner_mobile_no} 
           onChange={Inputhandlechange}
           addonBefore={prefixSelector}
           style={{
@@ -402,7 +429,7 @@ const Add_shop = () => {
       ]}
       >
       <Space direction="vertical">
-           <DatePicker onChange={Inputhandlechange} />
+           <DatePicker onChange={Inputhandlechange} value={data.est_year} />
   
       </Space>
       </Form.Item>
@@ -419,7 +446,9 @@ const Add_shop = () => {
         ]}
       >
 
-        <Input placeholder="Enter Service Type"   onChange={Inputhandlechange}/>
+        <Input placeholder="Enter Service Type" 
+        value={data.service_type}
+        onChange={Inputhandlechange}/>
       </Form.Item>
 
 
@@ -453,7 +482,9 @@ const Add_shop = () => {
           },
         ]}
       >
-        <Input.TextArea showCount maxLength={100}    onChange={Inputhandlechange}/>
+        <Input.TextArea showCount maxLength={100}   
+          value={data.other_remark}
+        onChange={Inputhandlechange}/>
       </Form.Item>
 
 
