@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import type { DatePickerProps } from 'antd';
+// import type { DatePickerProps } from 'antd';
 import { DatePicker, Space } from 'antd';
 import swal from 'sweetalert';
 import {useNavigate} from 'react-router-dom';
@@ -52,11 +52,11 @@ const tailFormItemLayout = {
 };
 const Add_shop = () => {
   const navigate = useNavigate();
-  const [form] = Form.useForm();
+  // const [form] = Form.useForm();
   
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
+  // const onFinish = (values) => {
+  //   console.log('Received values of form: ', values);
+  // };
 
   const [data, setData] = useState({
     shop_registration: "",
@@ -77,30 +77,58 @@ const Add_shop = () => {
     reg_on:"",
 });
 
-  const Inputhandlechange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(name, value);
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+  // const Inputhandlechange = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   console.log(name, value);
+  //   setData({
+  //     ...data,
+  //     [name]: value,
+  //   });
+  // };
+
+  // const postUser = async () => {
+  //   const data1 = await fetch("http://localhost:4000/addshop", {
+  //     method: "post",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(data)
+  //   });
+  //   console.log(data1);
+  // };
+
+
+  // const postUser = async () => {
+  //  await fetch('http://localhost:4000/addshop', {
+
+  //   method: 'POST',
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     'Content-type': 'application/json; charset=UTF-8',
+  //   },
+  // })
+  //    .then((response) => response.json())
+  //    .then((data) => {
+  //       console.log(data);
+  //       // Handle data
+  //    })
+  //    .catch((err) => {
+  //       console.log(err.message);
+  //    });
+  //   }
+
 
   const postUser = async () => {
-    const data1 = await fetch("http://localhost:4000/addshop", {
-      method: "post",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data)
-    });
-    console.log(data1);
-  };
+    const Response = await axios.post(
+      "http://localhost:4000/addshop",
+      data
+    );
+    console.log("data", Response);
+    }
 
 
-  
-  //  const postUser= async ()=>{
+//  const postUser= async ()=>{
   //   axios.post(`https://localhost:4000/addshop`, { data })
   //   .then(res => {
   //     console.log(res);
@@ -155,15 +183,15 @@ const Add_shop = () => {
       
 
     <Form
-      {...formItemLayout}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
-      scrollToFirstError
+      // {...formItemLayout}
+      // form={form}
+      // name="register"
+      // onFinish={onFinish}
+      // initialValues={{
+      //   residence: ['zhejiang', 'hangzhou', 'xihu'],
+      //   prefix: '86',
+      // }}
+      // scrollToFirstError
     >
 
        <Form.Item
@@ -182,7 +210,11 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input   placeholder="Enter your shop name"   onChange={Inputhandlechange}  value={data.shop_name}/>
+        <Input   placeholder="Enter your shop name"  
+         onChange={(e) => {
+          setCompanylogo(e.target.value);
+        }}
+         value={data.shop_name}/>
       </Form.Item>
 
       <Form.Item
@@ -498,7 +530,7 @@ const Add_shop = () => {
     </div>
   );
 };
+
+
 export default Add_shop;
 
-
-//satyam

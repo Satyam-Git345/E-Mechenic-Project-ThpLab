@@ -11,6 +11,7 @@ const View_shop = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState([0]);
 
+  //satyam
   const columns = [
     {
       
