@@ -9,21 +9,21 @@ const Add_company = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const setUser = async () => {
-    const data = { companyname,companylogo};
-   const data1= await fetch("http://localhost:4000/addvehicle_company", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    console.log(data1);
-  };
+  // const setUser = async () => {
+  //   const data = { companyname,companylogo};
+  //  const data1= await fetch("http://localhost:4000/addvehicle_company", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+  //   console.log(data1);
+  // };
 
   const submitHandle = (e) => {
     e.preventDefault();
-    setUser();
+    // setUser();
     setOpen(false);
     swal(
       "Vehicle Category added successfully!",
