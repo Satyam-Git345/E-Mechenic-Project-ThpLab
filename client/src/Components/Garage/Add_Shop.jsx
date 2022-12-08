@@ -20,24 +20,24 @@ const { Option } = Select;
 //   console.log(date, dateString);
 // };
 
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
+// const formItemLayout = {
+//   labelCol: {
+//     xs: {
+//       span: 24,
+//     },
+//     sm: {
+//       span: 8,
+//     },
+//   },
+//   wrapperCol: {
+//     xs: {
+//       span: 24,
+//     },
+//     sm: {
+//       span: 16,
+//     },
+//   },
+// };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
@@ -52,94 +52,52 @@ const tailFormItemLayout = {
 };
 const Add_shop = () => {
   const navigate = useNavigate();
-  // const [form] = Form.useForm();
-  
-  // const onFinish = (values) => {
-  //   console.log('Received values of form: ', values);
-  // };
-
-  const [data, setData] = useState({
-    shop_registration: "",
-    shop_name: "",
-    address: "",
-    state: "",
-    city: "",
-    pin: "",
-    mobile_no: "",
-    email: "",
-    website: "",
-    shop_owner_name: "",
-    shop_owner_mobile_no: "",
-    est_year:"",
-    service_type:"",
-    other_remark:"",
-    password: "",
-    reg_on:"",
-});
-
-  // const Inputhandlechange = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(name, value);
-  //   setData({
-  //     ...data,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const postUser = async () => {
-  //   const data1 = await fetch("http://localhost:4000/addshop", {
-  //     method: "post",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //     },
-  //     body: JSON.stringify(data)
-  //   });
-  //   console.log(data1);
-  // };
+  const [shop_registration, setShopreg] = useState("");
+  const [shop_name, setShopname] = useState("");
+  const [address, setShopaddress] = useState("");
+  const [state, setShopstate] = useState("");
+  const [city, setShopcity] = useState("");
+  const [pin, setShoppin] = useState("");
+  const [email, setShopemail] = useState("");
+  const [website, setShopwebsite] = useState("");
+  const [shop_owner_name, setShopownername] = useState("");
+  const [shop_owner_mobile_no, setShopownermobile] = useState("");
+  const [est_year, setShopestyear] = useState("");
+  const [service_type, setShopservicetype]  = useState("");
+  const [other_remark, setShopotherremark] = useState("");
+  const [password, setShoppassward] = useState("");
+  const [reg_on, setShopregon] = useState("");
 
 
-  // const postUser = async () => {
-  //  await fetch('http://localhost:4000/addshop', {
-
-  //   method: 'POST',
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     'Content-type': 'application/json; charset=UTF-8',
-  //   },
-  // })
-  //    .then((response) => response.json())
-  //    .then((data) => {
-  //       console.log(data);
-  //       // Handle data
-  //    })
-  //    .catch((err) => {
-  //       console.log(err.message);
-  //    });
-  //   }
 
 
-  const postUser = async () => {
-    const Response = await axios.post(
-      "http://localhost:4000/addshop",
-      data
-    );
-    console.log("data", Response);
-    }
 
-
-//  const postUser= async ()=>{
-  //   axios.post(`https://localhost:4000/addshop`, { data })
-  //   .then(res => {
-  //     console.log(res);
-  //     console.log(res.data);
-  //   })
-  //  }
-
+  const setUser = () => {
+    axios.post('http://localhost:4000/addshop', {
+      shop_registration,
+      shop_name,
+      address,
+      state,
+      city,
+      pin,
+      shop_owner_mobile_no,
+      email,
+      website,
+      shop_owner_name,
+      est_year,
+      service_type,
+      other_remark,
+      password,
+      reg_on,
+    })
+    .then((response) => {
+      console.log(response);
+    });
+  }
 
   const submitHandle = (e) => {
     e.preventDefault();
-    postUser();
+    setUser();
     swal("Vehicle Category added successfully!","success");
     navigate("/viewshop");
   };
@@ -212,9 +170,9 @@ const Add_shop = () => {
       >
         <Input   placeholder="Enter your shop name"  
          onChange={(e) => {
-          setCompanylogo(e.target.value);
+          setShopname(e.target.value);
         }}
-         value={data.shop_name}/>
+         value={shop_name}/>
       </Form.Item>
 
       <Form.Item
@@ -233,8 +191,11 @@ const Add_shop = () => {
           {min:10}
         ]}
       >
-        <Input placeholder="Enter your Shop Registration Number name"   onChange={Inputhandlechange} 
-         value={data.shop_registration}
+        <Input placeholder="Enter your Shop Registration Number name"   
+          onChange={(e) => {
+            setShopreg(e.target.value);
+          }} 
+         value={shop_registration}
         />
       </Form.Item>
 
@@ -251,8 +212,10 @@ const Add_shop = () => {
         ]}
         hasFeedback
       >
-        <Input.Password placeholder="Enter your Passward"  value={data.password}   
-        onChange={Inputhandlechange} />
+        <Input.Password placeholder="Enter your Passward"  value={password}   
+        onChange={(e) => {
+          setShoppassward(e.target.value);
+        }}/>
       </Form.Item>
 
 
@@ -277,9 +240,7 @@ const Add_shop = () => {
         ]}
       >
 
-        <Input.Password placeholder="Enter your password again"   onChange={Inputhandlechange}
-         value={data.password}
-        />
+        <Input.Password placeholder="Enter your password again"  />
       </Form.Item>
 
 
@@ -299,7 +260,11 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your address"   onChange={Inputhandlechange} value={data.address} />
+        <Input placeholder="Enter your address"   
+         onChange={(e) => {
+          setShopaddress(e.target.value);
+        }}
+        value={address} />
       </Form.Item>
 
       
@@ -319,8 +284,11 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your state"   onChange={Inputhandlechange}
-        value={data.state}
+        <Input placeholder="Enter your state"  
+         onChange={(e) => {
+          setShopstate(e.target.value);
+        }}
+        value={state}
         />
       </Form.Item>
 
@@ -340,8 +308,11 @@ const Add_shop = () => {
           {min:5}
         ]}
       >
-        <Input placeholder="Enter your city"   onChange={Inputhandlechange}
-        value={data.city}
+        <Input placeholder="Enter your city"   
+         onChange={(e) => {
+          setShopcity(e.target.value);
+        }}
+        value={city}
         />
       </Form.Item>
 
@@ -363,8 +334,10 @@ const Add_shop = () => {
         ]}
       >
         <Input placeholder="Enter your pin/zip code"  
-        value={data.pin}
-        onChange={Inputhandlechange}/>
+        value={pin}
+        onChange={(e) => {
+          setShoppin(e.target.value);
+        }}/>
       </Form.Item>
 
 
@@ -384,8 +357,10 @@ const Add_shop = () => {
         ]}
       >
         <Input placeholder="Enter your email"  
-        value={data.email}
-        onChange={Inputhandlechange}/>
+        value={email}
+        onChange={(e) => {
+          setShopemail(e.target.value);
+        }}/>
       </Form.Item>
       
       
@@ -403,8 +378,10 @@ const Add_shop = () => {
       >
         <AutoComplete options={websiteOptions} onChange={onWebsiteChange}>
           <Input placeholder="Enter your website url" 
-          value={data.website}
-          onChange={Inputhandlechange}/>
+          value={website}
+          onChange={(e) => {
+            setShopwebsite(e.target.value);
+          }}/>
         </AutoComplete>
       </Form.Item>
 
@@ -426,8 +403,10 @@ const Add_shop = () => {
         ]}
       >
         <Input placeholder="Enter your name"  
-        value={data.shop_owner_name}
-        onChange={Inputhandlechange}/>
+        value={shop_owner_name}
+        onChange={(e) => {
+          setShopownername(e.target.value);
+        }}/>
       </Form.Item>
 
 
@@ -441,8 +420,10 @@ const Add_shop = () => {
           },
         ]}
       >
-        <InputNumber  min={1} max={10} value={data.shop_owner_mobile_no} 
-          onChange={Inputhandlechange}
+        <InputNumber  min={1} max={10} value={shop_owner_mobile_no} 
+           onChange={(e) => {
+            setShopownermobile(e.target.value);
+          }}
           addonBefore={prefixSelector}
           style={{
             width: '100%',
@@ -461,7 +442,10 @@ const Add_shop = () => {
       ]}
       >
       <Space direction="vertical">
-           <DatePicker onChange={Inputhandlechange} value={data.est_year} />
+           <DatePicker  onChange={(e) => {
+                setShopestyear(e.target.value);
+              }}
+               value={est_year} />
   
       </Space>
       </Form.Item>
@@ -479,8 +463,11 @@ const Add_shop = () => {
       >
 
         <Input placeholder="Enter Service Type" 
-        value={data.service_type}
-        onChange={Inputhandlechange}/>
+        value={service_type}
+        onChange={(e) => {
+          setShopservicetype(e.target.value);
+        }}
+        />
       </Form.Item>
 
 
@@ -515,8 +502,10 @@ const Add_shop = () => {
         ]}
       >
         <Input.TextArea showCount maxLength={100}   
-          value={data.other_remark}
-        onChange={Inputhandlechange}/>
+          value={other_remark}
+          onChange={(e) => {
+            setShopotherremark(e.target.value);
+          }}/>
       </Form.Item>
 
 

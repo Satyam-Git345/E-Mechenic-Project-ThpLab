@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import { Input, Form } from "antd";
 import swal from "sweetalert";
+import axios from 'axios';
 
 const Add_company = () => {
   const [companyname, setCompanyname] = useState("");
@@ -21,9 +22,19 @@ const Add_company = () => {
   //   console.log(data1);
   // };
 
+  const setUser = () => {
+    axios.post('http://localhost:4000/addvehicle_company', {
+      companyname,
+      companylogo,
+    })
+    .then((response) => {
+      console.log(response);
+    });
+  }
+
   const submitHandle = (e) => {
     e.preventDefault();
-    // setUser();
+    setUser();
     setOpen(false);
     swal(
       "Vehicle Category added successfully!",
