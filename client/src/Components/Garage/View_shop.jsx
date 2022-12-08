@@ -11,7 +11,6 @@ const View_shop = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState([0]);
 
-  //satyam
   const columns = [
     {
       
@@ -58,7 +57,7 @@ const View_shop = () => {
       Key: "5",
       title: "Actions",
 
-      render: (users) => {
+      render: (users1) => {
         return (
           <div style={{display: 'flex'}}>
             <EditOutlined
@@ -69,7 +68,7 @@ const View_shop = () => {
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
               onClick={() => {
-                deleteuser(users.shop_id);
+                deleteuser(users1.shop_id);
               }}
             />
           </div>
@@ -86,7 +85,7 @@ const View_shop = () => {
 
     const data = await res.json();
     setUsers(data);
-    console.log(data);
+    console.log(users);
   };
 
   const deleteuser = async (shop_id) => {

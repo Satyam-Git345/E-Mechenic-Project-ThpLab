@@ -5,6 +5,8 @@ import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 import { useNavigate, Link } from "react-router-dom";
+// import { LoadingOutlined } from '@ant-design/icons';
+// import { Spin } from 'antd';
 
 
 const ViewVehicalCategory = () => {
@@ -86,11 +88,11 @@ const ViewVehicalCategory = () => {
   };
 
   const getData = async () => {
-    // setLoading(1);
+    
+  
     const Response = await fetch("http://localhost:4000/viewvehicle_category", {
       method: "GET",
     });
-
      const data = await Response.json();
      setUsers(data);
      console.log("Satyam",users);
