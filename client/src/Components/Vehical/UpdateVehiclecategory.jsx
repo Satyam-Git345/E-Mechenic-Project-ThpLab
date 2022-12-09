@@ -2,7 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import {Button,Input, Form } from 'antd';
+import {Form } from 'antd';
+import { Button, form, Input, Select } from "antd";
+const { Option } = Select;
 
 
 function  UpdateVehicle_category() {
@@ -14,6 +16,37 @@ function  UpdateVehicle_category() {
     vehicle_type: "",
   });
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
 
   const Inputhandlechange = (e) => {
     const name = e.target.name;

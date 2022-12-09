@@ -1,10 +1,13 @@
 import React from "react";
+import { DatePicker, Space} from "antd";
 import { useEffect, useState } from "react";
 import { Button, Table,} from "antd";
 import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+
 
 const View_shop = () => {
   const navigate = useNavigate();
@@ -59,11 +62,13 @@ const View_shop = () => {
 
       render: (users1) => {
         return (
-          <div style={{display: 'flex'}}>
-            <EditOutlined
-              style={{ color: "blue", fontSize: 20 }}
-              
-            />
+          <div>
+          <Link to={`/updateshop/${users1.shop_id}`}>
+          <EditOutlined
+             style={{ color: "blue", fontSize: 20 }}
+             onClick={() => handleRoutes(users1.shop_id)}
+           />
+          </Link>
 
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
@@ -76,6 +81,10 @@ const View_shop = () => {
       },
     },
   ];
+
+  const handleRoutes = (shop_id) => {
+    navigate(`updateshop/${shop_id}`);
+  };
 
   const getData = async () => {
     setLoading(1);

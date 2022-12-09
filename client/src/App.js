@@ -14,6 +14,7 @@ import Addshop from './Components/Garage/Add_Shop';
 import Blockedshop from './Components/Garage/Blocked_shop';
 import Shopverification from './Components/Garage/Shop_verification';
 import Viewshop from './Components/Garage/View_shop';
+import UpdateShop from './Components/Garage/UpdateShop';
 import Addcustomer from './Components/Customer/Add_customer';
 import Viewcustomer from './Components/Customer/View_customer';
 import Addproductcategory from './Components/Product/Add_productcategory';
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/addcompany" element={<Addcompany />} />
                         <Route path="/addvehicalcategory" element={<Addvehiclecategory />} />
                         <Route path="/updatevehiclecategory/:vehicle_cat_id" element={<UpdateVehiclecategory />} />
+                        <Route path="/updateshop/:shop_id" element={<UpdateShop/>} />
                         <Route path="/viewcompany" element={<Viewcompany />} />
                         <Route path="/viewmodel" element={<Viewmodel />} />
                         <Route path="/viewvehicalcategory" element={<Viewvehiclecategory />} />
