@@ -247,7 +247,7 @@ const Add_shop = () => {
 
             ({getFieldValue})=>({
               validator(_,value){
-                  if(!value || getFieldValue('passward')===value ){
+                  if(!value || getFieldValue('password')===value ){
                     return  Promise.resolve();
                   }
                   return Promise.reject('The Two Passwards You Have Entered Does Not Matched');
