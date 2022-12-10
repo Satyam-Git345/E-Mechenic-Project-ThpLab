@@ -424,7 +424,7 @@ const Add_shop = () => {
         </Form.Item>
 
         <Form.Item
-          name="phone"
+          name="phone1"
           label="Phone Number:"
           rules={[
             {
@@ -480,23 +480,7 @@ const Add_shop = () => {
           />
         </Form.Item>
 
-        {/* <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: 'Please select gender!',
-          },
-        ]}
-      >
-
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item> */}
+        
 
         <Form.Item
           name="phone"

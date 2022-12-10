@@ -73,25 +73,8 @@ function  UpdateShop() {
   const {shop_id } = useParams();
    console.log("Update",shop_id);
    const [form] = Form.useForm();
-   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-   const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
   
 
-
-   
   const navigate = useNavigate();
   const [data1, setData] = useState({
         shop_registration:"",
@@ -146,8 +129,8 @@ function  UpdateShop() {
 
     const oldData = res.data[0];
     console.log("get shop by id",oldData);
-    console.log("Pavan",data1.address);
     setData(oldData);
+    console.log("Pavan",data1.shop_name);
   };
  
 
@@ -179,33 +162,25 @@ function  UpdateShop() {
        scrollToFirstError
       >
         <Form.Item
-          name="shop_name"
           label="Shop Name"
           
         >
-          <Input
-         
-              onChange={Inputhandlechange}
-          
-              value={data1.shop_name}
-          />
+          <Input value={data1.shop_name}  name="shop_name" onChange={Inputhandlechange}/>
         </Form.Item>
 
         <Form.Item
-          name="reg_no"
           label="Shop Registration Number :"
           
         >
           <Input
          
-            onChange={Inputhandlechange}
+            onChange={Inputhandlechange}    name="reg_no"
           
               value={data1.shop_registration}
                         />
         </Form.Item>
 
         <Form.Item
-          name="password"
           label="Password"
           
         >
@@ -219,7 +194,6 @@ function  UpdateShop() {
 
       
         <Form.Item
-          name="address"
           label="Address:"
           
         >
@@ -231,7 +205,6 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="state"
           label="State:"
           
         >
@@ -244,7 +217,6 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="city"
           label="City:"
           
         >
@@ -257,7 +229,6 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="pin"
           label="Pin/Zip Code:"
           
         >
@@ -270,7 +241,6 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="email"
           label="E-mail"
           
         >
@@ -283,42 +253,36 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="website"
           label="Website"
           
         >
-          <AutoComplete options={websiteOptions} onChange={onWebsiteChange}>
+         
             <Input
           
-              onChange={Inputhandlechange}
               name="website"
               value={data1.website}
             />
-          </AutoComplete>
+       
         </Form.Item>
 
         <Form.Item
-          name="owner name"
+         
           label="Owner Name:"
           
         >
-          <Input
-   
-            onChange={Inputhandlechange}
-              name="name"
+          <Input onChange={Inputhandlechange} name="shop_owner_name"
               value={data1.shop_owner_name}
           />
         </Form.Item>
 
         <Form.Item
-          name="phone"
           label="Phone Number:"
          
         >
           <Input
             max={10}
             onChange={Inputhandlechange}
-              name="mobile"
+              name="shop_owner_mobile_no"
               value={data1.shop_owner_mobile_no}
             addonBefore={prefixSelector}
             style={{
@@ -328,7 +292,6 @@ function  UpdateShop() {
         </Form.Item>
 
         <Form.Item
-          name="date"
           label="Established On:"
           rules={[
             {
@@ -338,51 +301,31 @@ function  UpdateShop() {
           ]}
         >
           <Space direction="vertical">
-            <DatePicker onChange={onChange} />
+            <DatePicker onChange={onChange}     name="est_yer"/>
           </Space>
         </Form.Item>
 
         <Form.Item
-          name="service type"
           label="Service Type:"
          
         >
           <Input
           
             onChange={Inputhandlechange}
-              name="servicetype"
+              name="service_type"
               value={data1.service_type}
           />
         </Form.Item>
 
-        {/* <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: 'Please select gender!',
-          },
-        ]}
-      >
-
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item> */}
-
         <Form.Item
-          name="phone"
           label="Shop Phone Number:"
          
         >
           <Input
+          name="mobile_no"
             max={10}
             onChange={Inputhandlechange}
-              name="phoneno"
-              value={data1.mobile_no}
+            value={data1.mobile_no}
             addonBefore={prefixSelector}
             style={{
               width: "100%",
@@ -390,33 +333,30 @@ function  UpdateShop() {
           />
         </Form.Item>
 
-        <Form.Item
-          name="date"
+        {/* <Form.Item
           label="Registred On:"
           
         >
           <Space direction="vertical">
-            <DatePicker onChange={onChange1} />
+            <DatePicker onChange={onChange1}    value={data1.reg_on}  name="reg_on"/>
           </Space>
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
-          name="intro"
-          label="Other Remark:"
-         
-        >
+
+
+        <Form.Item label="Other Remark:">
           <Input.TextArea
-            showCount
-            maxLength={100}
+            // showCount
+            // maxLength={100}
             onChange={Inputhandlechange}
-              name="otherremark"
+         
               value={data1.other_remark}
           />
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" onClick={submitHandle} >
-            Register
+            Save
           </Button>
         </Form.Item>
       </Form>

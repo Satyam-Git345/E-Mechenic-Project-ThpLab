@@ -88,7 +88,7 @@ const updateshop = async (req, res) => {
     ];
 
     const qry =
-      "UPDATE tbl_shop SET user_type=?,shop_registration=?,shop_name=?,address=?,state=?,city=?,pin=?, mobile_no=? est_year=?,service_type=?,other_remark=?,password=?,reg_on=? where shop_id =?";
+      "UPDATE tbl_shop SET user_type= ? ,shop_registration= ?,shop_name= ?,address= ?,state= ?,city= ?,pin= ?, mobile_no= ? est_year= ?,service_type= ?,other_remark= ?,password= ?,reg_on= ? where shop_id = ?";
     await conn.query(qry, data, (err, result) => {
       if (err) {
         console.log(err.sqlMessage);
