@@ -116,37 +116,26 @@ const View_modal = () => {
   },[]);
 
   return (
-    <div>
-      <div>
-        <div
+    <>
+      <h1
           style={{
-            marginBottom: -84,
+            textAlign: "center",
+            fontWeight: "bold",
+            marginTop: "-38px",
+            color: "green",
+            fontFamily: "-moz-initial",
           }}
         >
-          <Button
-            type="primary"
-       
-            // disabled={!hasSelected}
-            loading={!loading}
-          >
-            Reload
-          </Button>
-          <span
-            style={{
-              marginLeft: 8,
-            }}
-          >
-            {/* {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""} */}
-          </span>
-        </div>
+          All Modals List
+        </h1>
+      <div>
         <Table
-          // rowSelection={rowSelection}
           columns={columns}
           dataSource={users}
           pagination={true}
         />
       </div>
-    </div>
+    </>
   );
 };
 

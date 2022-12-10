@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DatePicker, Space} from "antd";
+import { DatePicker, Space } from "antd";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -58,7 +58,7 @@ const Add_shop = () => {
   const [reg_on, setShopregon] = useState("");
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    console.log("Received values of form: ", values);
   };
 
   const onChange = (date, dateString, e) => {
@@ -99,7 +99,7 @@ const Add_shop = () => {
         //   swal("Good job!", "You clicked the button!", "success");
         // }
         console.log(response);
-      })
+      });
   };
 
   const submitHandle = (e) => {
@@ -140,22 +140,30 @@ const Add_shop = () => {
   }));
 
   return (
-    <div stle={{backgroundColor: "transparent"}}>
-      <h1 style={{ textAlign: "center", fontWeight: "bold",marginTop: "-15px"}}>
-        Register New Shop
+    <div stle={{ backgroundColor: "transparent" }}>
+      <h1
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginTop: "-15px",
+          color: "green",
+          fontFamily: "-moz-initial",
+        }}
+      >
+        Add New Shop
       </h1>
 
       <Form
-          autoComplete="off"
-       {...formItemLayout}
-       form={form}
-       name="register"
-       onFinish={onFinish}
-       initialValues={{
-         residence: ['zhejiang', 'hangzhou', 'xihu'],
-         prefix: '86',
-       }}
-       scrollToFirstError
+        autoComplete="off"
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          residence: ["zhejiang", "hangzhou", "xihu"],
+          prefix: "86",
+        }}
+        scrollToFirstError
       >
         <Form.Item
           name="shop_name"
@@ -211,15 +219,16 @@ const Add_shop = () => {
           rules={[
             {
               required: true,
-              message: 'Passward must be provided',
+              message: "Passward must be provided",
             },
             { whitespace: true },
-            {min:6},
+            { min: 6 },
             {
-              validator:(_,value)=>
-                 value && value.includes('A') ? Promise.resolve() : Promise.reject('Passward does not Matched Critriea')
-                             
-            }
+              validator: (_, value) =>
+                value && value.includes("A")
+                  ? Promise.resolve()
+                  : Promise.reject("Passward does not Matched Critriea"),
+            },
           ]}
           hasFeedback
         >
@@ -240,19 +249,21 @@ const Add_shop = () => {
           rules={[
             {
               required: true,
-              message: 'Confirm Passward must be provided',
+              message: "Confirm Passward must be provided",
             },
-            {min:6},
+            { min: 6 },
             { whitespace: true },
 
-            ({getFieldValue})=>({
-              validator(_,value){
-                  if(!value || getFieldValue('password')===value ){
-                    return  Promise.resolve();
-                  }
-                  return Promise.reject('The Two Passwards You Have Entered Does Not Matched');
-              }
-            })
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  "The Two Passwards You Have Entered Does Not Matched"
+                );
+              },
+            }),
           ]}
         >
           <Input.Password placeholder="Enter your password again" />
@@ -480,8 +491,6 @@ const Add_shop = () => {
           />
         </Form.Item>
 
-        
-
         <Form.Item
           name="phone"
           label="Shop Phone Number:"
@@ -541,7 +550,7 @@ const Add_shop = () => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" onClick={submitHandle} >
+          <Button type="primary" htmlType="submit" onClick={submitHandle}>
             Register
           </Button>
         </Form.Item>

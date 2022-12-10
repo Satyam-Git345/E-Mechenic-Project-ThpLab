@@ -1,13 +1,11 @@
 import React from "react";
-import { DatePicker, Space} from "antd";
+import { DatePicker, Space } from "antd";
 import { useEffect, useState } from "react";
-import { Button, Table,} from "antd";
+import { Button, Table } from "antd";
 import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 import { useNavigate, Link } from "react-router-dom";
-
-
 
 const View_shop = () => {
   const navigate = useNavigate();
@@ -16,25 +14,21 @@ const View_shop = () => {
 
   const columns = [
     {
-      
       title: "Shop Name",
       dataIndex: "shop_name",
       key: "shop_name",
-      
     },
 
     {
       title: "Owner Name",
       dataIndex: "shop_owner_name",
       key: "shop_owner_name",
-
     },
 
     {
       title: "Mobile Number",
       dataIndex: "mobile_no",
       key: "mobile_no",
-
     },
 
     {
@@ -45,16 +39,15 @@ const View_shop = () => {
 
     {
       title: "Email",
-      dataIndex:"email",
-      key:"email",
+      dataIndex: "email",
+      key: "email",
     },
-    
+
     {
       title: "Shop Details",
       dataIndex: "website",
       key: "email",
     },
-
 
     {
       Key: "5",
@@ -62,13 +55,13 @@ const View_shop = () => {
 
       render: (users1) => {
         return (
-          <div>
-          <Link to={`/updateshop/${users1.shop_id}`}>
-          <EditOutlined
-             style={{ color: "blue", fontSize: 20 }}
-             onClick={() => handleRoutes(users1.shop_id)}
-           />
-          </Link>
+          <div style={{ display: "flex" }}>
+            <Link to={`/updateshop/${users1.shop_id}`}>
+              <EditOutlined
+                style={{ color: "blue", fontSize: 20 }}
+                onClick={() => handleRoutes(users1.shop_id)}
+              />
+            </Link>
 
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
@@ -108,9 +101,7 @@ const View_shop = () => {
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-        await axios.delete(
-          `http://localhost:4000/removeshop/${shop_id}`
-        );
+        await axios.delete(`http://localhost:4000/removeshop/${shop_id}`);
 
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
@@ -127,35 +118,22 @@ const View_shop = () => {
     getData();
   }, []);
 
-  
   return (
     <div>
+      <h1
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginTop: "-15px",
+          color: "green",
+          fontFamily: "-moz-initial",
+        }}
+      >
+        All Shops List
+      </h1>
+
       <div>
-        <div
-          style={{
-            marginBottom: -84,
-          }}
-        >
-          <Button
-            type="primary"
-       
-            // disabled={!hasSelected}
-            loading={!loading}
-          >
-            Reload
-          </Button>
-          <span
-            
-          >
-            {/* {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""} */}
-          </span>
-        </div>
-        <Table
-          // rowSelection={rowSelection}
-          columns={columns}
-          dataSource={users}
-          pagination={true}
-        />
+        <Table columns={columns} dataSource={users} pagination={true} />
       </div>
     </div>
   );
