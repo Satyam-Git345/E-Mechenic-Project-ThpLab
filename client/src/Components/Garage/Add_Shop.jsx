@@ -158,7 +158,6 @@ const Add_shop = () => {
         {...formItemLayout}
         form={form}
         name="register"
-        onFinish={onFinish}
         initialValues={{
           residence: ["zhejiang", "hangzhou", "xihu"],
           prefix: "86",

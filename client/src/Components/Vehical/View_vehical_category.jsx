@@ -6,11 +6,9 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 import { useNavigate, Link } from "react-router-dom";
 
-
 const ViewVehicalCategory = () => {
   const [users, setUsers] = useState([{}]);
-
-
+  const [loading, setloading] = useState([0]);
   const navigate = useNavigate();
   
 
@@ -54,16 +52,17 @@ const ViewVehicalCategory = () => {
 
   
   const getData = async () => {
+    setloading(19);
     const Response = await fetch("http://localhost:4000/viewvehicle_category", {
       method: "GET",
     });
+    
     const data = await Response.json();
     setUsers(data);
     console.log("Satyam", users);
   };
 
   const deleteuser = async (vehicle_cat_id) => {
-    // setLoading(10);
     console.log(vehicle_cat_id);
     swal({
       title: "Are you sure?",
@@ -110,10 +109,10 @@ const ViewVehicalCategory = () => {
           All Vehicle Categories
         </h1>
       <div>
-      <Table columns={columns}
+      <Table 
+         columns={columns}
          dataSource={users} 
          pagination={true} />
-        
         </div>
     </div>
   );

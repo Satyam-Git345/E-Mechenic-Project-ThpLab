@@ -35,7 +35,7 @@ getItem('Garage', 'sub2',<ToolTwoTone />, [
 ]),
 
 getItem('Customer','sub3', <UserOutlined />, [
-    getItem(<NavLink to="addcustomer">Add New Customer</NavLink>,'11'),
+    // getItem(<NavLink to="addcustomer">Add New Customer</NavLink>,'11'),
     getItem(<NavLink to="viewcustomer">Modify/View Customer</NavLink>, '12'),
 ]),
 
@@ -81,7 +81,7 @@ const Sidebar= ({children}) => {
         <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline" items={items}
         style={{
            marginTop: '65px',
-           fontSize: '19px',
+           fontSize: '15px',
            fontFamily:'Franklin Gothic Medium',
            size: '20px',
         }}
