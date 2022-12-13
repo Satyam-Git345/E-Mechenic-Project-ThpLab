@@ -35,7 +35,6 @@ getItem('Garage', 'sub2',<ToolTwoTone />, [
 ]),
 
 getItem('Customer','sub3', <UserOutlined />, [
-    // getItem(<NavLink to="addcustomer">Add New Customer</NavLink>,'11'),
     getItem(<NavLink to="viewcustomer">View Customers</NavLink>, '12'),
 ]),
 
