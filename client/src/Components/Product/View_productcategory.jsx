@@ -44,7 +44,7 @@ const View_productcategory = () => {
       render: (users1) => {
         return (
           <div style={{ display: "flex" }}>
-            <Link to={`/updateshop/${users1.product_cat_id}`}>
+            <Link to={`/updateproductcategory/${users1.product_cat_id}`}>
               <EditOutlined
                 style={{ color: "blue", fontSize: 20 }}
                 onClick={() => handleRoutes(users1.product_cat_id)}
@@ -63,8 +63,8 @@ const View_productcategory = () => {
     },
   ];
 
-  const handleRoutes = (shop_id) => {
-    navigate(`updateshop/${shop_id}`);
+  const handleRoutes = (product_cat_id) => {
+    navigate(`updateproductcategory/${product_cat_id}`);
   };
 
   const getData = async () => {
@@ -78,17 +78,17 @@ const View_productcategory = () => {
     console.log(users);
   };
 
-  const deleteuser = async (shop_id) => {
-    console.log(shop_id);
+  const deleteuser = async (product_cat_id) => {
+    console.log(product_cat_id);
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this Vehicle Category!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then(async (willDelete) => {
+    }).then(async (willDelete) => {      
       if (willDelete) {
-        await axios.delete(`http://localhost:4000/removeshop/${shop_id}`);
+        await axios.delete(`http://localhost:4000/deleteproduct_category/${product_cat_id}`);
 
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",

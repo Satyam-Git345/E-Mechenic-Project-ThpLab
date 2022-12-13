@@ -17,6 +17,7 @@ import Viewshop from './Components/Garage/View_shop';
 import UpdateShop from './Components/Garage/UpdateShop';
 import Viewcustomer from './Components/Customer/View_customer';
 import Addproductcategory from './Components/Product/Add_productcategory';
+import UpdateVehiclecategory from './Components/Vehical/UpdateVehiclecategory';
 import Viewproductcategory from './Components/Product/View_productcategory';
 import Addproductcompany from './Components/Product/Add_productcompany';
 import Viewproductcompany from './Components/Product/View_productcompany'
@@ -30,7 +31,7 @@ import Addcoupan from './Components/Coupan/Add_coupan';
 import Viewcoupan from './Components/Coupan/View_coupan';
 import Addoffer from './Components/Offer/Add_offer';
 import Viewoffer from './Components/Offer/View_offer';
-import UpdateVehiclecategory from './Components/Vehical/UpdateVehiclecategory';
+import UpdateProductcategory from './Components/Product/UpdateProductcategory';
 
 
 
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/addcompany" element={<Addcompany />} />
                         <Route path="/addvehicalcategory" element={<Addvehiclecategory />} />
                         <Route path="/updatevehiclecategory/:vehicle_cat_id" element={<UpdateVehiclecategory />} />
+                        <Route path="/updateproductcategory/:product_cat_id" element={<UpdateProductcategory />} />
                         <Route path="/updateshop/:shop_id" element={<UpdateShop/>} />
                         <Route path="/viewcompany" element={<Viewcompany />} />
                         <Route path="/viewmodel" element={<Viewmodel />} />
