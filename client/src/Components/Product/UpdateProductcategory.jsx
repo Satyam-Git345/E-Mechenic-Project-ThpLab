@@ -95,15 +95,17 @@ function Update_productcategory() {
               onChange={Inputhandlechange}
               name="product_category"
               value={data1.product_category}
+              placeholder="Enter Product Category"
             />
           </Form.Item>
-
+                        
           <Form.Item  label="SGST">
             <Input
               style={{ width: "50%", height: "40px" }}
               name="SGST"
               onChange={Inputhandlechange}
               value={data1.SGST}
+              placeholder="Enter SGST"
             />
           </Form.Item>
 
@@ -114,6 +116,7 @@ function Update_productcategory() {
               onChange={Inputhandlechange}
               value={data1.CGST}
               name="CGST"
+              placeholder="Enter CGST"
             />
           </Form.Item>
            

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Input, Form, InputNumber,Button } from "antd";
+import { Input, Form,Button } from "antd";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
@@ -77,7 +77,16 @@ const Add_productcategory = () => {
           />
         </Form.Item>
 
-        <Form.Item name="SGST" label="SGST">
+        <Form.Item name="SGST" label="SGST" 
+        rules={[
+          {
+            required: true,
+            message: "SGST must be provided",
+          },
+          { min: 1 },
+        ]}
+        hasFeedback
+        >
           <Input style={{ width: "50%" ,  height: "40px", }}   placeholder="Enter SGST Number"
              onChange={(e) => {
               setSgst(e.target.value);
@@ -86,7 +95,16 @@ const Add_productcategory = () => {
           />
         </Form.Item>
 
-        <Form.Item name="CGST" label="CGST">
+        <Form.Item name="CGST" label="CGST"
+        rules={[
+          {
+            required: true,
+            message: "CGST must be provided",
+          },
+          { min: 1 },
+        ]}
+        hasFeedback
+        >
           <Input style={{ width: "50%",   height: "40px", }}  placeholder="Enter CGST Number" 
            onChange={(e) => {
             setCgst(e.target.value);

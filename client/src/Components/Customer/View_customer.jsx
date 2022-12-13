@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Button, Table,} from "antd";
+import { Table,} from "antd";
 import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const View_customer = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState([0]);
 
   const columns = [
     {
@@ -82,7 +81,7 @@ const View_customer = () => {
   ];
 
   const getData = async () => {
-    setLoading(1);
+    
     const res = await fetch("http://localhost:4000/viewcustomer", {
       method: "GET",
     });
@@ -93,7 +92,7 @@ const View_customer = () => {
   };
 
   const deleteuser = async (customer_id) => {
-    setLoading(10);
+    
     console.log(customer_id);
     swal({
       title: "Are you sure?",
@@ -114,7 +113,7 @@ const View_customer = () => {
       } else {
         swal("Your imaginary file is safe!");
       }
-      getData();
+      // getData();
     });
   };
 
@@ -126,25 +125,22 @@ const View_customer = () => {
   return (
     <div>
       <div>
-        <div
+        <div>
+        <h1
           style={{
-            marginBottom: -84,
+            textAlign: "center",
+            fontWeight: "bold",
+            marginTop: "-20px",
+            color: "green",
+            fontFamily: "-moz-initial",
           }}
         >
-          <Button
-            type="primary"
-       
-            // disabled={!hasSelected}
-            loading={!loading}
-          >
-           
-          </Button>
-          <span
-            
-          >
-            {/* {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""} */}
-          </span>
+          All Active Customers
+        </h1>
         </div>
+
+
+
         <Table
           // rowSelection={rowSelection}
           columns={columns}

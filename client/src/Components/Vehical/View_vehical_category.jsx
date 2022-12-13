@@ -8,7 +8,6 @@ import { useNavigate, Link } from "react-router-dom";
 
 const ViewVehicalCategory = () => {
   const [users, setUsers] = useState([{}]);
-  const [loading, setloading] = useState([0]);
   const navigate = useNavigate();
   
 
@@ -52,7 +51,6 @@ const ViewVehicalCategory = () => {
 
   
   const getData = async () => {
-    setloading(19);
     const Response = await fetch("http://localhost:4000/viewvehicle_category", {
       method: "GET",
     });
