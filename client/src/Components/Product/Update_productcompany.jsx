@@ -7,10 +7,10 @@ import { Form, Input,Button} from "antd";
 
 
 
-function Update_productcategory() {
-  const { product_cat_id } = useParams();
-  console.log("Update", product_cat_id);
-  
+function Update_productcompany() {
+  const { product_company_id } = useParams();
+  console.log("Update", product_company_id);
+
 
   const navigate = useNavigate();
   const [data1, setData] = useState({
@@ -33,15 +33,12 @@ function Update_productcategory() {
     e.preventDefault();
     getuser();
     updateData();
-    navigate(`/viewproductcategory`);
+    navigate(`/viewproductcompany`);
   };
-  useEffect(() => {
-    getuser();
-  },[]);
 
   const updateData = async () => {
     const Response = await Axios.put(
-      `http://localhost:4000/updateproduct_category/${product_cat_id}`,
+      `http://localhost:4000/updateproduct_company/${product_company_id}`,
       data1
     );
     console.log("data", Response);
@@ -49,7 +46,7 @@ function Update_productcategory() {
 
   const getuser = async () => {
     const res = await Axios.get(
-      `http://localhost:4000/viewproduct_categorybyid/${product_cat_id}`
+      `http://localhost:4000/viewprocompanybyid/${product_company_id}`
     );
 
     const oldData = res.data[0];
@@ -58,7 +55,10 @@ function Update_productcategory() {
     console.log("Pavan", data1.shop_name);
   };
 
-  
+  useEffect(() => {
+    getuser();
+  }, []);
+
   return (
     <>
       <h1
@@ -70,16 +70,16 @@ function Update_productcategory() {
           fontFamily: "-moz-initial",
         }}
       >
-        Edit Product Category
+        Edit Product Company
       </h1>
       <div style={{ marginLeft: "330px", marginTop: "20px" }}>
         <Form>
           <Form.Item
-            label="Product Category"
+            label="Product Company"
             rules={[
               {
                 required: true,
-                message: "Product Category Name must be provided",
+                message: "Product Company Name must be provided",
               },
               { min: 5 },
             ]}
@@ -91,33 +91,13 @@ function Update_productcategory() {
                 width: "50%",
               }}
               onChange={Inputhandlechange}
-              name="product_category"
-              value={data1.product_category}
-              placeholder="Enter Product Category"
+              name="product_company"
+              value={data1.product_company}
+              placeholder="Enter Product Company"
             />
           </Form.Item>
                         
-          <Form.Item  label="SGST">
-            <Input
-              style={{ width: "50%", height: "40px" }}
-              name="SGST"
-              onChange={Inputhandlechange}
-              value={data1.SGST}
-              placeholder="Enter SGST"
-            />
-          </Form.Item>
-
-          <Form.Item  label="CGST">
-            <Input
-              style={{ width: "50%", height: "40px" }}
-              
-              onChange={Inputhandlechange}
-              value={data1.CGST}
-              name="CGST"
-              placeholder="Enter CGST"
-            />
-          </Form.Item>
-           
+        
           
 
 
@@ -137,4 +117,4 @@ function Update_productcategory() {
   );
 }
 
-export default Update_productcategory;
+export default Update_productcompany;

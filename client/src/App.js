@@ -21,6 +21,7 @@ import UpdateVehiclecategory from './Components/Vehical/UpdateVehiclecategory';
 import Viewproductcategory from './Components/Product/View_productcategory';
 import Addproductcompany from './Components/Product/Add_productcompany';
 import Viewproductcompany from './Components/Product/View_productcompany'
+import Updateproductcompany from './Components/Product/Update_productcompany'
 import Addprduct from './Components/Product/Add_product';
 import Viewproduct from './Components/Product/View_product';
 import Addpackage from './Components/Package/Addpackage';
@@ -47,6 +48,7 @@ function App() {
                         <Route path="/addvehicalcategory" element={<Addvehiclecategory />} />
                         <Route path="/updatevehiclecategory/:vehicle_cat_id" element={<UpdateVehiclecategory />} />
                         <Route path="/updateproductcategory/:product_cat_id" element={<UpdateProductcategory />} />
+                        <Route path="/updateproductcompany/:product_company_id" element={<Updateproductcompany />} />
                         <Route path="/updateshop/:shop_id" element={<UpdateShop/>} />
                         <Route path="/viewcompany" element={<Viewcompany />} />
                         <Route path="/viewmodel" element={<Viewmodel />} />
