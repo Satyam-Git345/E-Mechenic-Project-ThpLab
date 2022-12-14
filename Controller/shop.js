@@ -66,8 +66,8 @@ const deleteshop = async (req, res) => {
 
 const updateshop = async (req, res) => {
   try {
+
     const data = [
-      req.body.user_type,
       req.body.shop_registration,
       req.body.shop_name,
       req.body.address,
@@ -87,8 +87,8 @@ const updateshop = async (req, res) => {
       req.params.shop_id,
     ];
 
-    const qry =
-      "UPDATE tbl_shop SET user_type= ? ,shop_registration= ?,shop_name= ?,address= ?,state= ?,city= ?,pin= ?, mobile_no= ? est_year= ?,service_type= ?,other_remark= ?,password= ?,reg_on= ? where shop_id = ?";
+    const qry =`UPDATE tbl_shop SET user_type=? ,shop_registration= ?, shop_name= ?, address= ? ,state= ? ,city= ? ,pin= ?,  mobile_no= ?,  est_year= ?, service_type= ?, other_remark= ?,  password= ?,  reg_on= ?  where shop_id = ?`;
+
     await conn.query(qry, data, (err, result) => {
       if (err) {
         console.log(err.sqlMessage);
@@ -96,7 +96,9 @@ const updateshop = async (req, res) => {
         res.send(result);
       }
     });
-  } catch (err) {
+
+  } 
+  catch (err) {
     res.send(err.sqlMessage);
   }
 };

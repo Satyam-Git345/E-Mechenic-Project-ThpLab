@@ -4,6 +4,37 @@ import { Input, Form,Button } from "antd";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 12,
+    },
+    sm: {
+      span: 7,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 5,
+      offset: 0,
+    },
+    sm: {
+      span: 11,
+      offset:1,
+    },
+  },
+};
 const Add_productcategory = () => {
   const navigate = useNavigate();
 
@@ -50,8 +81,17 @@ const Add_productcategory = () => {
       >
         Add Product Category
       </h1>
-        <div style={{marginLeft:"330px", marginTop:"20px"}}>
-      <Form>
+        <div>
+      <Form
+         {...formItemLayout}
+         {...tailFormItemLayout}
+         onSubmit={e => {
+          e.preventDefault();
+          setUser();
+          swal("Vehicle Category added successfully!", "success");
+          navigate("/viewproductcategory");
+         }}
+      >
         <Form.Item 
            name="product_category"
           label="Product Category"
@@ -66,10 +106,6 @@ const Add_productcategory = () => {
         >
           <Input
             placeholder="Enter Product Category"
-            style={{
-              height: "40px",
-              width:"50%"
-            }}
             onChange={(e) => {
               setProductCategoryname(e.target.value);
             }}
@@ -87,7 +123,8 @@ const Add_productcategory = () => {
         ]}
         hasFeedback
         >
-          <Input style={{ width: "50%" ,  height: "40px", }}   placeholder="Enter SGST Number"
+          <Input 
+          placeholder="Enter SGST Number"
              onChange={(e) => {
               setSgst(e.target.value);
             }}
@@ -105,7 +142,8 @@ const Add_productcategory = () => {
         ]}
         hasFeedback
         >
-          <Input style={{ width: "50%",   height: "40px", }}  placeholder="Enter CGST Number" 
+          <Input
+           placeholder="Enter CGST Number" 
            onChange={(e) => {
             setCgst(e.target.value);
           }}
@@ -113,8 +151,8 @@ const Add_productcategory = () => {
           />
         </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" onClick={submitHandle} style={{marginLeft:"150px"}}>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit" onClick={submitHandle} style={{marginLeft:"470px"}}>
            Add Product Category
           </Button>
         </Form.Item>

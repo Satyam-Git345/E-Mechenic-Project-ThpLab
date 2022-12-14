@@ -4,9 +4,6 @@ import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input,Button} from "antd";
 
-
-
-
 function Update_productcategory() {
   const { product_cat_id } = useParams();
   console.log("Update", product_cat_id);

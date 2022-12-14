@@ -163,9 +163,9 @@ function UpdateShop() {
 
           <Form.Item label="Shop Registration Number :">
             <Input
-              onChange={Inputhandlechange}
-              name="reg_no"
+              name="shop_registraction"
               value={data1.shop_registration}
+              onChange={Inputhandlechange}
             />
           </Form.Item>
 
@@ -214,7 +214,7 @@ function UpdateShop() {
           </Form.Item>
 
           <Form.Item label="Website">
-            <Input name="website" value={data1.website} />
+            <Input name="website" value={data1.website}   onChange={Inputhandlechange} />
           </Form.Item>
 
           <Form.Item label="Owner Name:">
