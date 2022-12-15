@@ -21,6 +21,8 @@ const route3 = require('./Routs/shop');
 const route4 = require('./Routs/product_category');
 const route5 = require('./Routs/customer');
 const route6 = require('./Routs/product_company');
+const route7 = require('./Routs/product');
+
 
 app.use('/', route);
 app.use('/', route1);
@@ -30,4 +32,4 @@ app.use('/', route3);
 app.use('/', route4);
 app.use('/', route5);
 app.use('/', route6);
-
+app.use('/', route7);
