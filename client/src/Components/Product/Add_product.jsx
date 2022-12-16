@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 //import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-import { AutoComplete, Button, Form, Input, Select } from "antd";
-const { Option } = Select;
+import {DownCircleTwoTone } from '@ant-design/icons';
+import {  Button, Form, Input, Select } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -37,6 +36,8 @@ const tailFormItemLayout = {
   },
 };
 const Add_product = () => {
+  const [users, setUsers] = useState([]);
+  const [users1, setUsers1] = useState([]);
   //const navigate = useNavigate();
   // const [form] = Form.useForm();
   // const [shop_registration, setShopreg] = useState("");
@@ -56,9 +57,6 @@ const Add_product = () => {
   // const [password, setShoppassward] = useState("");
   // const [reg_on, setShopregon] = useState("");
 
- 
-
-  
   // const setUser = () => {
   //   axios
   //     .post("http://localhost:4000/addshop", {
@@ -97,9 +95,31 @@ const Add_product = () => {
   //   navigate("/viewshop");
   // };
 
-  
+  const getData = async () => {
+    const res = await fetch("http://localhost:4000/viewproduct_category", {
+      method: "GET",
+    });
 
-  
+    const data = await res.json();
+    setUsers(data);
+  };
+
+  const getData1 = async () => {
+    const res = await fetch("http://localhost:4000/viewproductcompany", {
+      method: "GET",
+    });
+
+    const data = await res.json();
+    setUsers1(data);
+    console.log(users1);
+  };
+
+  console.log(users);
+
+  useEffect(() => {
+    getData();
+    getData1();
+  }, []);
   return (
     <div stle={{ backgroundColor: "transparent" }}>
       <h1
@@ -154,7 +174,7 @@ const Add_product = () => {
               message: "Please input MRP!",
             },
 
-            { min: 2 }
+            { min: 2 },
           ]}
         >
           <Input
@@ -165,7 +185,41 @@ const Add_product = () => {
             // value={shop_name}
           />
         </Form.Item>
-        
+
+        <Form.Item name="product_category" label="Product Category">
+          <Select
+            placeholder="Select Product Category"
+            style={{ width: "50%" }}
+            allowClear
+            maxTagCount={2}
+          >
+            {users.map((product, index) => {
+              return (
+                <Select.Option key={index} value={product.product_category}>
+                  {product.product_category}
+                </Select.Option>
+              );
+            })}
+          </Select>
+        </Form.Item>
+
+        <Form.Item name="product_company" label="Product Company">
+          <Select
+            placeholder="Select Product Company"
+            style={{ width: "50%" }}
+            allowClear
+            suffixIcon={<DownCircleTwoTone />}
+          >
+            {users1.map((product, index) => {
+              return (
+                <Select.Option key={index} value={product.product_company}>
+                  {product.product_company}
+                </Select.Option>
+              );
+            })}
+          </Select>
+        </Form.Item>
+
         <Form.Item
           name="description"
           label="Description"
@@ -190,10 +244,8 @@ const Add_product = () => {
           />
         </Form.Item>
 
-
-
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" >
+          <Button type="primary" htmlType="submit">
             Register
           </Button>
         </Form.Item>

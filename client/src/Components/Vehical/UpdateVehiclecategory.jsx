@@ -3,8 +3,39 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form } from "antd";
-import { Button, form, Input, Select } from "antd";
-const { Option } = Select;
+import { Button, Input} from "antd";
+
+
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 12,
+    },
+    sm: {
+      span: 7,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 5,
+      offset: 0,
+    },
+    sm: {
+      span: 10,
+      offset: 0,
+    },
+  },
+};
 
 function UpdateVehicle_category() {
   const { vehicle_cat_id } = useParams();
@@ -14,37 +45,6 @@ function UpdateVehicle_category() {
   const [data1, setData] = useState({
     vehicle_type: "",
   });
-
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 8,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
 
   const Inputhandlechange = (e) => {
     const name = e.target.name;
@@ -88,7 +88,10 @@ function UpdateVehicle_category() {
 
   return (
     <>
-      <Form>
+      <Form
+      {...formItemLayout}
+      {...tailFormItemLayout}
+     >
       <h1
           style={{
             textAlign: "center",
@@ -101,22 +104,23 @@ function UpdateVehicle_category() {
         >
           Edit Vehicle Category
         </h1>
-        <Form.Item>
+        <Form.Item
+        label="Vehicle_type"
+        >
           <Input
-            style={{
-              marginTop: "30px",
-              height: "40px",
-              size: "40px",
-            }}
             onChange={Inputhandlechange}
             name="vehicle_type"
             value={data1.vehicle_type}
             required={data1.vehicle_type}
           />
         </Form.Item>
-        <Button key="submit" type="primary" onClick={submitHandle}>
-          Submit
+        <Form.Item>
+        <Button key="submit" type="primary" onClick={submitHandle}
+        style={{marginLeft:"500px", marginTop:"30px"}}
+        >
+          Save
         </Button>
+        </Form.Item>
       </Form>
     </>
   );

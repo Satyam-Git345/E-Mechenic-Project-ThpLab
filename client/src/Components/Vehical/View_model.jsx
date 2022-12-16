@@ -1,36 +1,35 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import {Button, Table } from "antd";
 import axios from "axios";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import swal from 'sweetalert';
-import {useNavigate} from 'react-router-dom';
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+import { Table } from "antd";
 
 const View_modal = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [loading, setLoading] = useState([0]);
 
   const columns = [
     {
-      
       title: "Modal Name",
       dataIndex: "model_name",
       key: "modal_name",
-      
     },
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-
+      title: "Company Name",
+      dataIndex: "company_name",
+      key: "company_name",
     },
     {
-      title: "Fule Type",
+      title: "vehicle_type",
+      dataIndex: "vehicle_type",
+      key: "vehicle_type",
+    },
+    {
+      title: "Fuel Type",
       dataIndex: "fuel_type",
-      key: "fule_type",
-
+      key: "fuel_type",
     },
 
     {
@@ -40,40 +39,24 @@ const View_modal = () => {
       render: (data) => {
         return (
           <>
-            <EditOutlined style={{ color: "blue", fontSize: 20 }} 
-             onClick={()=>{
-              
-             }}
+            <EditOutlined
+              style={{ color: "blue", fontSize: 20 }}
+              onClick={() => {}}
             />
 
-          
-              <DeleteOutlined
-                style={{ color: "red", marginLeft: 30, fontSize: 20 }}
-                 onClick={() => {
-                  deleteuser(data.company_id)
-                 }}
-              
-              />
+            <DeleteOutlined
+              style={{ color: "red", marginLeft: 30, fontSize: 20 }}
+              onClick={() => {
+                deleteuser(data.company_id);
+              }}
+            />
           </>
         );
       },
     },
   ];
 
-
-  // const onSelectChange = (newSelectedRowKeys) => {
-  //   console.log("selectedRowKeys changed: ", newSelectedRowKeys);
-  //   setSelectedRowKeys(newSelectedRowKeys);
-  // };
-  
-  // const rowSelection = {
-  //   selectedRowKeys,
-  //   onChange: onSelectChange,
-  // };
-  // const hasSelected = selectedRowKeys.length > 0;
-
-    const getData = async () => {
-    setLoading(1);
+  const getData = async () => {
     const res = await fetch("http://localhost:4000/viewvehicle_model", {
       method: "GET",
     });
@@ -91,49 +74,42 @@ const View_modal = () => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then(async(willDelete) => {
-      if (willDelete)
-      {
-        await axios.delete(`http://localhost:4000/deletevehicle_company/${company_id}`);
-       
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        await axios.delete(
+          `http://localhost:4000/deletevehicle_company/${company_id}`
+        );
+
         swal("Poof! Your imaginary file has been deleted!", {
-          icon: "success",});
-          navigate("/viewcompany");
-      } 
-      else 
-      {
+          icon: "success",
+        });
+        navigate("/viewcompany");
+      } else {
         swal("Your imaginary file is safe!");
       }
       getData();
     });
-   
   };
 
-  
   useEffect(() => {
     getData();
-  },[]);
+  }, []);
 
   return (
     <>
       <h1
-          style={{
-            textAlign: "center",
-            fontWeight: "bold",
-            marginTop: "-38px",
-            color: "green",
-            fontFamily: "-moz-initial",
-          }}
-        >
-          All Modals List
-        </h1>
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          marginTop: "-38px",
+          color: "green",
+          fontFamily: "-moz-initial",
+        }}
+      >
+        All Available Modals
+      </h1>
       <div>
-        <Table
-          columns={columns}
-          dataSource={users}
-          pagination={true}
-        />
+        <Table columns={columns} dataSource={users} pagination={true} />
       </div>
     </>
   );
