@@ -57,9 +57,9 @@ const Add_shop = () => {
   const [password, setShoppassward] = useState("");
   const [reg_on, setShopregon] = useState("");
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+  // const onFinish = (values) => {
+  //   console.log("Received values of form: ", values);
+  // };
 
   const onChange = (date, dateString, e) => {
     console.log(date, dateString);

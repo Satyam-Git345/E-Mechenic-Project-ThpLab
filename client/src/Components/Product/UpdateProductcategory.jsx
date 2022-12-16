@@ -2,12 +2,41 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { Form, Input,Button} from "antd";
+import { Form, Input, Button } from "antd";
 
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 12,
+    },
+    sm: {
+      span: 7,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 5,
+      offset: 0,
+    },
+    sm: {
+      span: 11,
+      offset: 1,
+    },
+  },
+};
 function Update_productcategory() {
   const { product_cat_id } = useParams();
   console.log("Update", product_cat_id);
-  
 
   const navigate = useNavigate();
   const [data1, setData] = useState({
@@ -34,7 +63,7 @@ function Update_productcategory() {
   };
   useEffect(() => {
     getuser();
-  },[]);
+  }, []);
 
   const updateData = async () => {
     const Response = await Axios.put(
@@ -55,7 +84,6 @@ function Update_productcategory() {
     console.log("Pavan", data1.shop_name);
   };
 
-  
   return (
     <>
       <h1
@@ -69,8 +97,8 @@ function Update_productcategory() {
       >
         Edit Product Category
       </h1>
-      <div style={{ marginLeft: "330px", marginTop: "20px" }}>
-        <Form>
+      <div>
+        <Form {...formItemLayout} {...tailFormItemLayout}>
           <Form.Item
             label="Product Category"
             rules={[
@@ -83,20 +111,15 @@ function Update_productcategory() {
             hasFeedback
           >
             <Input
-              style={{
-                height: "40px",
-                width: "50%",
-              }}
               onChange={Inputhandlechange}
               name="product_category"
               value={data1.product_category}
               placeholder="Enter Product Category"
             />
           </Form.Item>
-                        
-          <Form.Item  label="SGST">
+
+          <Form.Item label="SGST">
             <Input
-              style={{ width: "50%", height: "40px" }}
               name="SGST"
               onChange={Inputhandlechange}
               value={data1.SGST}
@@ -104,27 +127,19 @@ function Update_productcategory() {
             />
           </Form.Item>
 
-          <Form.Item  label="CGST">
+          <Form.Item label="CGST">
             <Input
-              style={{ width: "50%", height: "40px" }}
-              
               onChange={Inputhandlechange}
               value={data1.CGST}
               name="CGST"
               placeholder="Enter CGST"
             />
           </Form.Item>
-           
-          
 
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={submitHandle}
-              style={{ marginLeft: "150px" }}
-            >
+          <Form.Item
+          {...tailFormItemLayout}
+          >
+            <Button type="primary" htmlType="submit" onClick={submitHandle} style={{marginLeft:"470px"}}>
               Save
             </Button>
           </Form.Item>
