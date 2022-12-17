@@ -45,27 +45,32 @@ const getproduct = async (req, res) => {
 //     }
 // }
 
-// const postvehical_cat = async (req,res) => {
-//     try {
-//         const {vehicle_cat_id,vehicle_type} = req.body;
-//         const data={
-//             vehicle_type,
-//             vehicle_cat_id:uuid()
-//         }
-//         const qry = "INSERT INTO  tbl_vehicle_category SET ?";
-//         await conn.query(qry, data,(err, result) => {
-//             if (err) {
-//                 console.log(err.sqlMessage);
-//             }
-//             else {
-//                 res.send(result);
-//             }
-//         })
-//     }
-//     catch (err) {
-//         res.send(err.sqlMessage);
-//     }
-// }
+const postproduct = async (req,res) => {
+    try {
+        const {product_name,product_cat_id,product_company_id,MRP,description} = req.body;
+        
+        const data={
+            product_name,
+            product_cat_id,
+            product_company_id,
+            MRP,
+            description,
+            product_id:uuid()
+        }
+        const qry = "INSERT INTO  tbl_product SET ?";
+        await conn.query(qry, data,(err, result) => {
+            if (err) {
+                console.log(err.sqlMessage);
+            }
+            else {
+                res.send(result);
+            }
+        })
+    }
+    catch (err) {
+        res.send(err.sqlMessage);
+    }
+}
 
 // const delete_vehical_cat=async(req,res)=>{
 //     try {
@@ -105,7 +110,7 @@ const getproduct = async (req, res) => {
     
 // }
 
-module.exports = {getproduct};
+module.exports = {getproduct,postproduct};
 
 
 

@@ -1,9 +1,10 @@
 const express = require('express');
 const route=express.Router();
 
-const {getproduct}=require('../Controller/product');
+const {getproduct,postproduct}=require('../Controller/product');
 
 route.get('/viewproduct',getproduct);
+route.post('/addproduct',postproduct);
 
 // route.get('/viewvehicle_categorybyid/:vehicle_cat_id',getvehical_catbyid);
 // route.post('/addvehicle_category',postvehical_cat);

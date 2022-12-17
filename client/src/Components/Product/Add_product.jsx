@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {  Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 
 const formItemLayout = {
   labelCol: {
@@ -36,66 +36,46 @@ const tailFormItemLayout = {
   },
 };
 const Add_product = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [users1, setUsers1] = useState([]);
   const [users2, setUsers2] = useState([]);
   const [users3, setUsers3] = useState([]);
-  //const navigate = useNavigate();
-  // const [form] = Form.useForm();
-  // const [shop_registration, setShopreg] = useState("");
-  // const [shop_name, setShopname] = useState("");
-  // const [address, setShopaddress] = useState("");
-  // const [state, setShopstate] = useState("");
-  // const [city, setShopcity] = useState("");
-  // const [email, setShopemail] = useState("");
-  // const [website, setShopwebsite] = useState("");
-  // const [shop_owner_name, setShopownername] = useState("");
-  // const [shop_owner_mobile_no, setShopownermobile] = useState("");
-  // const [mobile_no, setShopmono] = useState("");
-  // const [pin, setShoppin] = useState("");
-  // const [est_year, setShopestyear] = useState("");
-  // const [service_type, setShopservicetype] = useState("");
-  // const [other_remark, setShopotherremark] = useState("");
-  // const [password, setShoppassward] = useState("");
-  // const [reg_on, setShopregon] = useState("");
 
-  // const setUser = () => {
-  //   axios
-  //     .post("http://localhost:4000/addshop", {
-  //       shop_registration,
-  //       shop_name,
-  //       address,
-  //       state,
-  //       city,
-  //       pin,
-  //       shop_owner_mobile_no,
-  //       mobile_no,
-  //       email,
-  //       website,
-  //       shop_owner_name,
-  //       est_year,
-  //       service_type,
-  //       other_remark,
-  //       password,
-  //       reg_on,
-  //     })
-  //     .then((response) => {
-  //       // if(!response){
-  //       //   swal("Good job!", "You clicked the button!", "error");
-  //       // }
-  //       // else{
-  //       //   swal("Good job!", "You clicked the button!", "success");
-  //       // }
-  //       console.log(response);
-  //     });
-  // };
+  const [product_name, setProductname] = useState("");
+  const [MRP, setMrp] = useState("");
+  const [product_cat_id, setProductCategory] = useState("");
+  const [product_company_id, setProductcompany] = useState("");
+  //const [vehicle_cat_id, setVehicleCategory] = useState("");
+  //const [modal, setModal] = useState("");
+  const [description, setDescription] = useState("");
 
-  // const submitHandle = (e) => {
-  //   e.preventDefault();
-  //   setUser();
-  //   swal("Good job!", "Shop Added Sucessfully!", "success");
-  //   navigate("/viewshop");
-  // };
+  const setUser = () => {
+    axios
+      .post("http://localhost:4000/addproduct", {
+         product_name,
+         MRP,
+         product_cat_id,
+         product_company_id,
+         description
+      })
+      .then((response) => {
+        // if(!response){
+        //   swal("Good job!", "You clicked the button!", "error");
+        // }
+        // else{
+        //   swal("Good job!", "You clicked the button!", "success");
+        // }
+        console.log(response);
+      });
+  };
+
+  const submitHandle = (e) => {
+    e.preventDefault();
+    setUser();
+    swal("Good job!", "Shop Added Sucessfully!", "success");
+    navigate("/viewproduct");
+  };
 
   const getData = async () => {
     const res = await fetch("http://localhost:4000/viewproduct_category", {
@@ -106,6 +86,7 @@ const Add_product = () => {
     setUsers(data);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getData1 = async () => {
     const res = await fetch("http://localhost:4000/viewproductcompany", {
       method: "GET",
@@ -116,11 +97,12 @@ const Add_product = () => {
     console.log(users1);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getData2 = async () => {
     const Response = await fetch("http://localhost:4000/viewvehicle_category", {
       method: "GET",
     });
-    
+
     const data = await Response.json();
     setUsers2(data);
     console.log("Satyam", users);
@@ -182,10 +164,10 @@ const Add_product = () => {
         >
           <Input
             placeholder="Enter product name"
-            // onChange={(e) => {
-            //   setShopname(e.target.value);
-            // }}
-            // value={shop_name}
+            onChange={(e) => {
+              setProductname(e.target.value);
+            }}
+            value={product_name}
           />
         </Form.Item>
 
@@ -204,10 +186,10 @@ const Add_product = () => {
         >
           <Input
             placeholder="Enter MRP"
-            // onChange={(e) => {
-            //   setShopname(e.target.value);
-            // }}
-            // value={shop_name}
+            onChange={(e) => {
+              setMrp(e.target.value);
+            }}
+            value={MRP}
           />
         </Form.Item>
 
@@ -216,12 +198,18 @@ const Add_product = () => {
             placeholder="Select Product Category"
             style={{ width: "50%" }}
             allowClear
-            mode="multiple"
-            maxTagCount={2}
+            // mode="multiple"
+            // maxTagCount={1}
           >
             {users.map((product, index) => {
               return (
-                <Select.Option key={index} value={product.product_category}>
+                <Select.Option 
+                key={index} 
+                value={product.product_cat_id}
+                onChange={(e) => {
+                  setProductCategory(e.target.value);
+                }}
+                >
                   {product.product_category}
                 </Select.Option>
               );
@@ -234,26 +222,30 @@ const Add_product = () => {
             placeholder="Select Product Company"
             style={{ width: "50%" }}
             allowClear
-       
           >
             {users1.map((product, index) => {
               return (
-                <Select.Option key={index} value={product.product_company_id}>
+                <Select.Option key={index}
+                 value={product.product_company_id}
+                 onChange={(e) => {
+                  setProductcompany(e.target.value);
+                }}
+                 >
                   {product.product_company}
                 </Select.Option>
               );
             })}
           </Select>
         </Form.Item>
-        
 
-        <Form.Item name="vehicle_category" label="Filter Vehicle Modal By Vehical Category">
+        <Form.Item
+          name="vehicle_category"
+          label="Filter Vehicle Modal By Vehical Category"
+        >
           <Select
             placeholder="Select Vehicle Category"
             style={{ width: "50%" }}
-          
             allowClear
-  
           >
             {users2.map((product, index) => {
               return (
@@ -270,7 +262,6 @@ const Add_product = () => {
             placeholder="Select Vehicle Modal"
             style={{ width: "50%" }}
             allowClear
-        
           >
             {users3.map((product, index) => {
               return (
@@ -281,7 +272,6 @@ const Add_product = () => {
             })}
           </Select>
         </Form.Item>
-
 
         <Form.Item
           name="description"
@@ -300,17 +290,15 @@ const Add_product = () => {
         >
           <Input
             placeholder="Enter description"
-            // onChange={(e) => {
-            //   setShopname(e.target.value);
-            // }}
-            // value={shop_name}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            value={description}
           />
         </Form.Item>
 
-        
-
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" onClick={submitHandle}>
             Add Product
           </Button>
         </Form.Item>
