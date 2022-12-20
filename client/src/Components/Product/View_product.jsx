@@ -47,14 +47,14 @@ const View_productcategory = () => {
             <Link to={`/updateproductcategory/${users1.product_cat_id}`}>
               <EditOutlined
                 style={{ color: "blue", fontSize: 20 }}
-                onClick={() => handleRoutes(users1.product_cat_id)}
+                onClick={() => handleRoutes(users1.product_id)}
               />
             </Link>
 
             <DeleteOutlined
               style={{ color: "red", marginLeft: 30, fontSize: 20 }}
               onClick={() => {
-                deleteuser(users1.product_cat_id);
+                deleteuser(users1.product_id);
               }}
             />
           </div>

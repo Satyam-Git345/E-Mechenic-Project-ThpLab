@@ -113,7 +113,7 @@ const Sidebar= ({children}) => {
             className="site-layout-background"
             style={{
               padding: 24,
-              minHeight: 360,
+              minHeight: 260,
             }}
           >
             {children}

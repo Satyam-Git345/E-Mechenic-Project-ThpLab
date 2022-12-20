@@ -37,42 +37,51 @@ const tailFormItemLayout = {
 };
 const Add_product = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const [users1, setUsers1] = useState([]);
-  const [users2, setUsers2] = useState([]);
-  const [users3, setUsers3] = useState([]);
+  const [productcategory, setProductcategory] = useState([]);
+  const [productcompany, setProductcompany] = useState([]);
 
-  const [product_name, setProductname] = useState("");
-  const [MRP, setMrp] = useState("");
-  const [product_cat_id, setProductCategory] = useState("");
-  const [product_company_id, setProductcompany] = useState("");
-  //const [vehicle_cat_id, setVehicleCategory] = useState("");
-  //const [modal, setModal] = useState("");
-  const [description, setDescription] = useState("");
+  const [product_category, setProduct_category] = useState({
+       product_cat_id:"",
+       product_category:""
+  });
+   
+  const [product_company, setProduct_company] = useState({
+    product_company_id:"",
+    product_company:""
+});
 
-  const setUser = () => {
-    axios
-      .post("http://localhost:4000/addproduct", {
-         product_name,
-         MRP,
-         product_cat_id,
-         product_company_id,
-         description
-      })
-      .then((response) => {
-        // if(!response){
-        //   swal("Good job!", "You clicked the button!", "error");
-        // }
-        // else{
-        //   swal("Good job!", "You clicked the button!", "success");
-        // }
-        console.log(response);
-      });
+
+   const [product_name, setProductname] = useState({
+      product_name:"",
+  });
+  const [MRP, setMrp] = useState({
+      MRP:"",
+  });
+  
+  const [description, setDescription] = useState({
+      description:"",
+  });
+
+  const postdata = async () => {
+    const data = {
+      product_cat_id: product_category.product_cat_id,
+      product_company_id: product_company.product_company_id,
+      product_name: product_name.product_name,
+      MRP: MRP.MRP,
+      description:description.description,
+    }
+    console.log("this is data", data);
+    const res = await axios.post(
+      "http://localhost:4000/addproduct",
+      data
+    );
+    
+    console.log("responses of data", res);
   };
-
+ 
   const submitHandle = (e) => {
     e.preventDefault();
-    setUser();
+    postdata();
     swal("Good job!", "Shop Added Sucessfully!", "success");
     navigate("/viewproduct");
   };
@@ -83,48 +92,23 @@ const Add_product = () => {
     });
 
     const data = await res.json();
-    setUsers(data);
+    setProductcategory(data);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getData1 = async () => {
     const res = await fetch("http://localhost:4000/viewproductcompany", {
       method: "GET",
     });
 
     const data = await res.json();
-    setUsers1(data);
-    console.log(users1);
+    setProductcompany(data);
+    // console.log(users1);
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getData2 = async () => {
-    const Response = await fetch("http://localhost:4000/viewvehicle_category", {
-      method: "GET",
-    });
-
-    const data = await Response.json();
-    setUsers2(data);
-    console.log("Satyam", users);
-  };
-
-  const getData3 = async () => {
-    const res = await fetch("http://localhost:4000/viewvehicle_model", {
-      method: "GET",
-    });
-
-    const data = await res.json();
-    setUsers3(data);
-    console.log(data);
-  };
-
-  console.log(users);
 
   useEffect(() => {
     getData();
     getData1();
-    getData2();
-    getData3();
+   
   }, []);
 
   return (
@@ -165,9 +149,11 @@ const Add_product = () => {
           <Input
             placeholder="Enter product name"
             onChange={(e) => {
-              setProductname(e.target.value);
+              setProductname({
+                product_name: e.target.value,
+              });
             }}
-            value={product_name}
+            value={product_name.product_name}
           />
         </Form.Item>
 
@@ -176,7 +162,7 @@ const Add_product = () => {
           label="MRP"
           rules={[
             {
-              type: "number",
+              type: "text",
               required: true,
               message: "Please input MRP!",
             },
@@ -187,9 +173,11 @@ const Add_product = () => {
           <Input
             placeholder="Enter MRP"
             onChange={(e) => {
-              setMrp(e.target.value);
+              setMrp({
+                MRP: e.target.value,
+              });
             }}
-            value={MRP}
+            value={MRP.MRP}
           />
         </Form.Item>
 
@@ -198,19 +186,20 @@ const Add_product = () => {
             placeholder="Select Product Category"
             style={{ width: "50%" }}
             allowClear
-            // mode="multiple"
-            // maxTagCount={1}
+            onChange={(value) => {
+              setProduct_category({
+                product_cat_id: value,
+              });
+            }}
           >
-            {users.map((product, index) => {
+            {productcategory.map((value, index) => {
               return (
                 <Select.Option 
                 key={index} 
-                value={product.product_cat_id}
-                onChange={(e) => {
-                  setProductCategory(e.target.value);
-                }}
+                value={value.product_cat_id}
+                
                 >
-                  {product.product_category}
+                  {value.product_category}
                 </Select.Option>
               );
             })}
@@ -222,56 +211,27 @@ const Add_product = () => {
             placeholder="Select Product Company"
             style={{ width: "50%" }}
             allowClear
+            onChange={(value) => {
+              setProduct_company({
+                product_company_id: value,
+              });
+            }}
           >
-            {users1.map((product, index) => {
+            {productcompany.map((value, index) => {
               return (
                 <Select.Option key={index}
-                 value={product.product_company_id}
-                 onChange={(e) => {
-                  setProductcompany(e.target.value);
-                }}
+                 value={value.product_company_id}
                  >
-                  {product.product_company}
+                  {value.product_company}
                 </Select.Option>
               );
             })}
           </Select>
         </Form.Item>
 
-        <Form.Item
-          name="vehicle_category"
-          label="Filter Vehicle Modal By Vehical Category"
-        >
-          <Select
-            placeholder="Select Vehicle Category"
-            style={{ width: "50%" }}
-            allowClear
-          >
-            {users2.map((product, index) => {
-              return (
-                <Select.Option key={index} value={product.vehicle_cat_id}>
-                  {product.vehicle_type}
-                </Select.Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
+       
 
-        <Form.Item name="vehicle_modal" label="Add Suggested Modal">
-          <Select
-            placeholder="Select Vehicle Modal"
-            style={{ width: "50%" }}
-            allowClear
-          >
-            {users3.map((product, index) => {
-              return (
-                <Select.Option key={index} value={product.model_id}>
-                  {product.model_name}
-                </Select.Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
+       
 
         <Form.Item
           name="description"
@@ -291,14 +251,16 @@ const Add_product = () => {
           <Input
             placeholder="Enter description"
             onChange={(e) => {
-              setDescription(e.target.value);
+              setDescription({
+                description: e.target.value,
+              });
             }}
-            value={description}
+            value={description.description}
           />
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" onClick={submitHandle}>
+          <Button type="primary" htmlType="Add Product" onClick={submitHandle}>
             Add Product
           </Button>
         </Form.Item>
