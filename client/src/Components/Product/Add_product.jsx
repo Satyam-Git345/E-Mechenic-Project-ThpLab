@@ -14,6 +14,7 @@ const formItemLayout = {
       span: 8,
     },
   },
+  
   wrapperCol: {
     xs: {
       span: 24,
@@ -184,7 +185,7 @@ const Add_product = () => {
         <Form.Item name="product_category" label="Product Category">
           <Select
             placeholder="Select Product Category"
-            style={{ width: "50%" }}
+            // style={{ width: "50%" }}
             allowClear
             onChange={(value) => {
               setProduct_category({
@@ -209,7 +210,7 @@ const Add_product = () => {
         <Form.Item name="product_company" label="Product Company">
           <Select
             placeholder="Select Product Company"
-            style={{ width: "50%" }}
+          
             allowClear
             onChange={(value) => {
               setProduct_company({
@@ -228,10 +229,6 @@ const Add_product = () => {
             })}
           </Select>
         </Form.Item>
-
-       
-
-       
 
         <Form.Item
           name="description"

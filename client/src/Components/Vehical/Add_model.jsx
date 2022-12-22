@@ -97,7 +97,7 @@ function Add_model() {
   const Submithandle = async (e) => {
     e.preventDefault();
     postdata();
-    navigate("/viewvehiclmodel");
+    navigate("/viewmodel");
     window.confirm("Successfull Submitted");
   };
   useEffect(() => {

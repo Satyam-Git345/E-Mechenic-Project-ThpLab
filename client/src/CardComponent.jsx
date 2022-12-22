@@ -12,11 +12,11 @@ function CardComponent() {
     <div className="App">
       <Card  hoverable={true}
         style={{
-            width:'320px',
-            height:'280px',
+            width:'260px',
+            height:'240px',
             marginLeft: '105px',
             marginRight:'20px',
-            marginTop: '-50px'
+            marginTop: '-30px'
         }}
         actions={[
           <FacebookFilled style={{ color: "blue" }} />,

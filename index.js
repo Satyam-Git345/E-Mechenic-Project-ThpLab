@@ -22,6 +22,8 @@ const route4 = require('./Routs/product_category');
 const route5 = require('./Routs/customer');
 const route6 = require('./Routs/product_company');
 const route7 = require('./Routs/product');
+const route8 = require('./Routs/package');
+const route9 = require('./Routs/coupan');
 
 
 app.use('/', route);
@@ -33,3 +35,5 @@ app.use('/', route4);
 app.use('/', route5);
 app.use('/', route6);
 app.use('/', route7);
+app.use('/', route8);
+app.use('/', route9);

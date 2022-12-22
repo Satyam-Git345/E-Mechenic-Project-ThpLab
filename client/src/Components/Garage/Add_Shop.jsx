@@ -153,7 +153,7 @@ const Add_shop = () => {
         Add New Shop
       </h1>
 
-      <Form
+      <Form onSubmit={()=>submitHandle()}
         autoComplete="off"
         {...formItemLayout}
         form={form}
@@ -549,7 +549,7 @@ const Add_shop = () => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" onClick={submitHandle}>
+          <Button type="primary" htmlType="submit" >
             Register
           </Button>
         </Form.Item>

@@ -11,16 +11,16 @@ import {
 
 function Chartcom() {
   const data = [
-    {
-      name: "Services",
-      uv: 4000,
-      pv: 9400,
-      amt: 2400,
-    },
+    // {
+    //   name: "Services",
+    //   uv: 4000,
+    //   pv: 9400,
+    //   amt: 2400,
+    // },
     {
       name: "Customers",
-      uv: 9000,
-      pv: 1398,
+      uv: 7000,
+      pv: 8000,
       amt: 1210,
     },
     {
@@ -60,22 +60,22 @@ function Chartcom() {
       <h1
         style={{
           textAlign: "center",
-          marginTop: "60px",
+          marginTop: "100px",
           fontFamily: "Helvetica Neue",
           color: "grey",
           textShadow: "0px 5px 7px ",
           fontWeight: "bold",
-          fontSize: "60px",
+          fontSize: "50px",
         }}
       >
         Graph That Trust Our Business
       </h1>
       <BarChart
-        width={1300}
+        width={1000}
         height={500}
         data={data}
         margin={{
-          top: 55,
+          top: 30,
           right: 30,
           left: 120,
           bottom: 5,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {NavLink} from "react-router-dom"
+import {NavLink} from "react-router-dom";
 import {UserOutlined,ToolTwoTone,CarTwoTone,DashboardTwoTone}  from '@ant-design/icons';
 
 
@@ -17,7 +17,7 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
- getItem('Dashboard','sub0',<DashboardTwoTone />),
+ getItem(<NavLink to="/" >Dashboard</NavLink>,'0',<DashboardTwoTone />),
  getItem('Vehicle', 'sub1',<CarTwoTone />, [
     getItem(<NavLink to="/addvehicalcategory" >Add Vehical Category</NavLink>,'1'),
     getItem(<NavLink to="/viewvehicalcategory">Modify/View Category</NavLink>, '2'),
@@ -79,7 +79,7 @@ const Sidebar= ({children}) => {
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline" items={items}
         style={{
-           marginTop: '65px',
+           marginTop: '80px',
            fontSize: '15px',
            fontFamily:'Franklin Gothic Medium',
            size: '20px',
@@ -92,7 +92,7 @@ const Sidebar= ({children}) => {
           style={{
             padding: 0,
             height: '8%',
-            Color: 'white',
+            Color: 'red',
            }}
           E-Mechenic
         />
@@ -124,11 +124,12 @@ const Sidebar= ({children}) => {
           style={{
             textAlign: 'center',
             fontSize: '15px',
-            backgroundColor: 'white',
+            backgroundColor: 'yellow',
             height: '10px',
+            marginTop: '70px',
           }}
         >
-        {/* <h1>E-mechenic ©2022 Created by Satyam Shukla and Team</h1> */}
+        <h1>E-mechenic ©2022 Created by Satyam Shukla and Team</h1>
         </Footer>
       </Layout>
     </Layout>
